@@ -5,7 +5,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 
 export default function App() {
   return (
-    <BrowserRouter basename="/EntregaCoderReact-E-Commerce">
+    <BrowserRouter>
       <div className="font-sans bg-fruit-100 min-h-screen">
         <NavBar />
         <Routes>
