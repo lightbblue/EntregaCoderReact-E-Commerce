@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../data/products.js";
 import ItemDetail from "./ItemDetail";
+import { db } from "../firebase/config";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function ItemDetailContainer() {
   const [product, setProduct] = useState(null);
@@ -12,9 +13,16 @@ export default function ItemDetailContainer() {
   useEffect(() => {
     setLoading(true);
 
-    getProductById(itemId)
-      .then((response) => {
-        setProduct(response);
+    const docRef = doc(db, "products", itemId);
+
+    getDoc(docRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setProduct({ id: snapshot.id, ...snapshot.data() });
+        } else {
+          console.log("El producto no existe");
+          setProduct(null);
+        }
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
@@ -39,7 +47,7 @@ export default function ItemDetailContainer() {
             </div>
           </div>
         ) : (
-             product ? <ItemDetail {...product} /> : <p>El producto no existe</p>
+          product ? <ItemDetail {...product} /> : <p className="text-xl font-bold text-fruit-600 mt-20">El producto no existe</p>
         )}
     </div>
   );

@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 export default function ItemDetail({ id, name, price, category, img, description, stock }) {
     const [count, setCount] = useState(1);
+    const [quantityAdded, setQuantityAdded] = useState(0);
+
+    const { addItem } = useContext(CartContext);
 
     const handleIncrease = () => {
         if (count < stock) setCount(count + 1);
@@ -12,7 +17,14 @@ export default function ItemDetail({ id, name, price, category, img, description
     };
 
     const handleAdd = () => {
-        alert(`Agregaste ${count} unidades de ${name} al carrito`);
+        setQuantityAdded(count);
+        const item = {
+            id, 
+            name, 
+            price, 
+            img
+        };
+        addItem(item, count);
     };
 
     return (
@@ -37,30 +49,25 @@ export default function ItemDetail({ id, name, price, category, img, description
                   </div>
 
                   <div className="space-y-4">
-                      <div className="flex items-center justify-between bg-gray-50 rounded-lg p-2 border border-gray-200">
-                          <button 
-                              onClick={handleDecrease}
-                              className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${count <= 1 ? 'text-gray-300' : 'text-fruit-600 hover:bg-fruit-100 font-bold text-xl'}`}
-                              disabled={count <= 1}
-                          >
-                              -
-                          </button>
-                          <span className="text-xl font-bold text-gray-800">{count}</span>
-                          <button 
-                              onClick={handleIncrease}
-                              className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${count >= stock ? 'text-gray-300' : 'text-fruit-600 hover:bg-fruit-100 font-bold text-xl'}`}
-                              disabled={count >= stock}
-                          >
-                              +
-                          </button>
-                      </div>
-
-                      <button 
-                          onClick={handleAdd}
-                          className="w-full bg-gradient-to-r from-fruit-600 to-fruit-700 text-white py-4 rounded-lg font-bold text-lg hover:from-fruit-700 hover:to-fruit-800 transform active:scale-95 transition-all shadow-lg"
-                      >
-                          Agregar al Carrito
-                      </button>
+                      {quantityAdded > 0 ? (
+                        <Link to="/cart" className="w-full block text-center bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-colors">
+                            Terminar compra
+                        </Link>
+                    ) : (
+                        <>
+                            <div className="flex items-center justify-between bg-gray-50 rounded-lg p-2 border border-gray-200">
+                                <button onClick={handleDecrease} className="w-10 h-10 font-bold text-xl text-fruit-600">-</button>
+                                <span className="text-xl font-bold text-gray-800">{count}</span>
+                                <button onClick={handleIncrease} className="w-10 h-10 font-bold text-xl text-fruit-600">+</button>
+                            </div>
+                            <button 
+                                onClick={handleAdd}
+                                className="w-full bg-fruit-600 text-white py-4 rounded-lg font-bold hover:bg-fruit-700"
+                            >
+                                Agregar al Carrito
+                            </button>
+                        </>
+                    )}
                   </div>
                 </div>
             </div>

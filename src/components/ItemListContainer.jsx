@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProducts, getProductsByCategory } from "../data/products.js";
 import ItemList from "./ItemList";
+import { db } from "../firebase/config";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export default function ItemListContainer({ text }) {
   const [products, setProducts] = useState([]);
@@ -12,16 +13,24 @@ export default function ItemListContainer({ text }) {
   useEffect(() => {
     setLoading(true);
 
-    const asyncFunc = categoryId
-      ? getProductsByCategory
-      : getProducts;
+    const productsRef = collection(db, "products");
 
-    asyncFunc(categoryId)
-      .then(response => {
-        setProducts(response);
+    const q = categoryId 
+      ? query(productsRef, where("category", "==", categoryId))
+      : productsRef;
+
+    getDocs(q)
+      .then((resp) => {
+        const newProducts = resp.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data()
+          };
+        });
+        setProducts(newProducts);
       })
-      .catch(error => {
-        console.error(error);
+      .catch((error) => {
+        console.error("Error obteniendo productos:", error);
       })
       .finally(() => {
         setLoading(false);
