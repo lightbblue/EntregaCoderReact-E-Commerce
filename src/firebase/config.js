@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAC7Xmjo4ausbDYxm6aM9mkgu4VnXjkRHs",
+  apiKey: "",
   authDomain: "entregafinalcoderreact.firebaseapp.com",
   projectId: "entregafinalcoderreact",
   storageBucket: "entregafinalcoderreact.firebasestorage.app",
