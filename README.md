@@ -68,7 +68,6 @@ src/
 ├── App.jsx
 ├── index.css
 └── main.jsx
+```
 
-
----
 *Proyecto realizado para el curso de React JS de Coderhouse.*
