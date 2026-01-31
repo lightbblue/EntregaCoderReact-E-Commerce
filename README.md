@@ -29,7 +29,7 @@ Sigue estos pasos para correr el proyecto localmente:
 
 1.  **Clonar el repositorio:**
     ```bash
-    git clone [https://github.com/TU_USUARIO/EntregaCoderReact-E-Commerce.git](https://github.com/TU_USUARIO/EntregaCoderReact-E-Commerce.git)
+    git clone [https://github.com/lightbblue/EntregaCoderReact-E-Commerce.git](https://github.com/lightbblue/EntregaCoderReact-E-Commerce.git)
     ```
 
 2.  **Instalar dependencias:**
@@ -46,31 +46,28 @@ Sigue estos pasos para correr el proyecto localmente:
 
 ## 📂 Estructura del Proyecto
 
-├── src/
-│   ├── assets/
-│   ├── components/
-│   │   ├── Cart.jsx
-│   │   ├── CartWidget.jsx
-│   │   ├── Checkout.jsx
-│   │   ├── Item.jsx
-│   │   ├── ItemDetail.jsx
-│   │   ├── ItemDetailContainer.jsx
-│   │   ├── ItemList.jsx
-│   │   ├── ItemListContainer.jsx
-│   │   └── NavBar.jsx
-│   ├── context/
-│   │   ├── CartContext.js
-│   │   └── CartProvider.jsx
-│   ├── firebase/
-│   │   └── config.js
-│   └── services/
-│       ├── App.jsx
-│       ├── index.css
-│       └── main.jsx
-├── index.html
-├── package.json
-├── tailwind.config.js
-└── vite.config.js
+```text
+src/
+├── assets/
+├── components/
+│   ├── Cart.jsx
+│   ├── CartWidget.jsx
+│   ├── Checkout.jsx
+│   ├── Item.jsx
+│   ├── ItemDetail.jsx
+│   ├── ItemDetailContainer.jsx
+│   ├── ItemList.jsx
+│   ├── ItemListContainer.jsx
+│   └── NavBar.jsx
+├── context/
+│   ├── CartContext.js
+│   └── CartProvider.jsx
+├── firebase/
+│   └── config.js
+├── services/
+├── App.jsx
+├── index.css
+└── main.jsx
 
 
 ---
